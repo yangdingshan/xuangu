@@ -761,7 +761,6 @@ body {
 }
 
 .stock-table tbody tr {
-  cursor: pointer;
   transition: background-color var(--transition-fast);
 }
 
@@ -778,6 +777,11 @@ body {
   color: var(--color-blue);
   font-family: var(--font-mono);
   font-weight: 500;
+  cursor: pointer;
+}
+
+.cell-code:hover {
+  text-decoration: underline;
 }
 
 .cell-change-up {

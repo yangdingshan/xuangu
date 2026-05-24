@@ -146,7 +146,7 @@ def _get_sector_map(codes: List[str]) -> Dict[str, str]:
     # 读取缓存
     if os.path.exists(cache_file):
         mtime = os.path.getmtime(cache_file)
-        if time.time() - mtime < 86400:  # 24 小时有效
+        if time.time() - mtime < 604800:  # 7 天有效，行业分类极少变动
             try:
                 with open(cache_file, "r", encoding="utf-8") as f:
                     cache = json.load(f)
@@ -435,6 +435,9 @@ def _check_consolidation(klines: List[dict], code: str,
         return False
 
     last_lu_idx = lu_indices[-1]
+    # 最后一天是涨停的不算，需要有至少一天整理确认
+    if last_lu_idx == len(klines) - 1:
+        return False
     last_lu_high = klines[last_lu_idx]["high"]
 
     range_low = last_lu_high * (1 + range_low_pct / 100.0)

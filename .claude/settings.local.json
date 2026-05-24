@@ -20,7 +20,9 @@
       "Bash(cmd *)",
       "Bash(curl -s http://localhost:8000/static/app.js)",
       "Bash(curl -s http://localhost:8000/api/hot_industries)",
-      "Bash(curl -s http://localhost:8000/static/style.css)"
+      "Bash(curl -s http://localhost:8000/static/style.css)",
+      "Bash(curl *)",
+      "Bash(tasklist *)"
     ]
   }
 }

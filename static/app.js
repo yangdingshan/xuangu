@@ -721,8 +721,8 @@ function buildStockRow(s) {
     limitUpHtml = '<span class="cell-limit-up">' + esc(String(lu)) + '次</span>';
   }
 
-  return '<tr onclick="openStockPage(\'' + rawCode + '\')">' +
-    '<td class="cell-code">' + code + '</td>' +
+  return '<tr>' +
+    '<td class="cell-code" onclick="openStockPage(\'' + rawCode + '\')">' + code + '</td>' +
     '<td>' + name + '</td>' +
     '<td>' + price + '</td>' +
     '<td>' + changeHtml + '</td>' +
