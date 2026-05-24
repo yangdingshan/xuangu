@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(NO_PROXY=\"*\" no_proxy=\"*\" python *)",
+      "Bash(curl -s --connect-timeout 5 http://127.0.0.1:7897)",
+      "Bash(echo \"CURL_EXIT: $?\")",
+      "Bash(curl -x http://127.0.0.1:7897 --connect-timeout 10 -s \"https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=5&po=1&np=1&fltt=2&invt=2&fid=f3&fs=m:0+t:6&fields=f2,f3,f12,f14\")",
+      "Bash(curl -x http://127.0.0.1:7897 --connect-timeout 10 -s -w \"\\\\nHTTP_CODE: %{http_code}\\\\nSIZE: %{size_download}\" \"https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=3&po=1&np=1&fltt=2&invt=2&fid=f3&fs=m:0+t:6&fields=f2,f3,f12,f14\")",
+      "Bash(curl -s -X POST \"http://localhost:8000/api/screen\" -H \"Content-Type: application/json\" -d '{\"filters\":{\"change_pct\":{\"enabled\":true,\"min_val\":3,\"max_val\":5},\"limit_up\":{\"enabled\":true,\"extra\":{\"days\":20,\"min_count\":1}},\"volume_ratio\":{\"enabled\":true,\"min_val\":1},\"turnover_rate\":{\"enabled\":true,\"min_val\":5,\"max_val\":10},\"market_cap\":{\"enabled\":true,\"min_val\":50,\"max_val\":200}}}')",
+      "Bash(start *)",
+      "Bash(timeout 5)",
+      "Bash(curl -s http://localhost:8000/)",
+      "Bash(curl -s http://localhost:8000/api/sectors)",
+      "Bash(curl -s http://localhost:8000/api/industries)",
+      "Bash(pkill -f \"uvicorn\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 32036 /F)",
+      "Bash(cmd *)",
+      "Bash(curl -s http://localhost:8000/static/app.js)",
+      "Bash(curl -s http://localhost:8000/api/hot_industries)",
+      "Bash(curl -s http://localhost:8000/static/style.css)"
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A 股选股器</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 class="app-title">A 股选股器</h1>
+    </header>
+
+    <div id="filter-bar" class="filter-bar">
+      <!-- 由 JS 动态渲染 -->
+    </div>
+
+    <div class="main-content">
+      <div class="content-left">
+        <div id="stats-row" class="stats-row" style="display:none;">
+          <div class="stat-item">
+            <span class="stat-label">扫描总数</span>
+            <span class="stat-value" id="stat-total">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">符合条件</span>
+            <span class="stat-value" id="stat-matched">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">更新时间</span>
+            <span class="stat-value" id="stat-time">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">选中率</span>
+            <span class="stat-value" id="stat-rate">--</span>
+          </div>
+        </div>
+
+        <div class="results-panel">
+          <div class="results-header">
+            <h2 class="results-title">筛选结果</h2>
+            <button id="btn-export" class="btn-export" style="display:none;" onclick="exportCSV()">导出 CSV</button>
+          </div>
+
+          <div id="skeleton-container" class="skeleton-container" style="display:none;">
+          </div>
+
+          <div id="error-panel" class="error-panel" style="display:none;">
+            <span class="error-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+            <span class="error-message" id="error-message"></span>
+            <button class="btn-retry" onclick="doScreen()">重试</button>
+          </div>
+
+          <div id="empty-state" class="empty-state" style="display:none;">
+            <div class="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M8 11h6"/></svg></div>
+            <p class="empty-text">暂无符合条件的股票</p>
+            <p class="empty-sub">请调整筛选条件后重试</p>
+          </div>
+
+          <div id="table-wrapper" class="table-wrapper" style="display:none;">
+            <table class="stock-table">
+              <thead>
+                <tr>
+                  <th>代码</th>
+                  <th>名称</th>
+                  <th class="sortable" data-sort="price">现价</th>
+                  <th class="sortable" data-sort="change_pct">涨幅</th>
+                  <th class="sortable" data-sort="volume_ratio">量比</th>
+                  <th class="sortable" data-sort="turnover_rate">换手率</th>
+                  <th class="sortable" data-sort="market_cap">市值(亿)</th>
+                  <th class="sortable" data-sort="limit_up_count">近20日涨停</th>
+                  <th>行业</th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sector-panel" id="sector-panel">
+        <div class="sector-panel-header">
+          <h3 class="sector-panel-title">行业资金</h3>
+          <div class="sector-sort">
+            <button class="sort-btn active" data-sort="inflow" onclick="sortSectors('inflow')">净流入</button>
+            <button class="sort-btn" data-sort="change" onclick="sortSectors('change')">涨幅</button>
+          </div>
+        </div>
+        <div id="sector-loading" class="sector-loading">
+          <div class="skeleton-row">
+            <div class="skeleton-cell"></div>
+            <div class="skeleton-cell skeleton-cell-sm"></div>
+            <div class="skeleton-cell skeleton-cell-md"></div>
+          </div>
+        </div>
+        <div id="sector-list" class="sector-list" style="display:none;">
+        </div>
+        <div class="hot-section">
+          <h4 class="hot-section-title">10日热度榜</h4>
+          <div id="hot-industries-list" class="hot-industries-list">
+            <div class="sector-loading">
+              <div class="skeleton-row">
+                <div class="skeleton-cell"></div>
+                <div class="skeleton-cell skeleton-cell-sm"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sector-error" class="sector-error" style="display:none;">加载失败</div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
